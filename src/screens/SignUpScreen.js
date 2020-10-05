@@ -7,6 +7,9 @@ import {
   ScrollView,
 } from 'react-native';
 
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 import {withFormik} from 'formik';
 import * as Yup from 'yup';
 
@@ -221,6 +224,23 @@ export default withFormik({
   }),
 
   handleSubmit: (values, {setSubmitting, setErrors}) => {
-    console.log('a');
+    auth()
+      .createUserWithEmailAndPassword(values.email, values.senha)
+      .then((userInfo) => {
+        //console.log(userInfo);
+        firestore().collection('Users').doc(userInfo.user.uid).set({
+          nome: values.nome,
+          cpf: values.cpf,
+          telefone: values.telefone,
+        });
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        if (error.code === 'auth/email-already-in-use') {
+          setErrors({message: 'Esse endereço de email já esta em uso!'});
+        } else {
+          setErrors({message: 'Erro'});
+        }
+      });
   },
 })(SignUpScreen);

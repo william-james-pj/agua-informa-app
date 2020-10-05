@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
+
+import auth from '@react-native-firebase/auth';
 
 import {withFormik} from 'formik';
 import * as Yup from 'yup';
@@ -146,7 +148,21 @@ export default withFormik({
       .required('Preencha o campo de senha'),
   }),
 
-  handleSubmit: (values, { setSubmitting, setErrors }) => {
-    console.log(values);
+  handleSubmit: (values, {setSubmitting, setErrors}) => {
+    auth()
+      .signInWithEmailAndPassword(values.email, values.senha)
+      .then((value) => console.log(value))
+      .catch((error) => {
+        setSubmitting(false);
+        if (error.code === 'auth/wrong-password') {
+          setErrors({message: 'E-mail ou senha inválida'});
+        } else if (error.code === 'auth/user-not-found') {
+          setErrors({
+            message: 'Nenhum usuário correspondente ao e-mail fornecido',
+          });
+        } else {
+          setErrors({message: 'Erro'});
+        }
+      });
   },
 })(LoginScreen);

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "613159938597",
+    "firebase_url": "https://appupx-a611e.firebaseio.com",
+    "project_id": "appupx-a611e",
+    "storage_bucket": "appupx-a611e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613159938597:android:2cca1d6fea6f85594bedcc",
+        "android_client_info": {
+          "package_name": "com.appupx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613159938597-ehjfihvoh1n3l8ep1ld97uve03k9hhrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-gwYWXAk1EUJ2IwPj5ZUuFDGCC6iP16I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613159938597-ehjfihvoh1n3l8ep1ld97uve03k9hhrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
