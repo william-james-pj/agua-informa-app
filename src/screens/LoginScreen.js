@@ -14,14 +14,14 @@ import * as Yup from 'yup';
 
 import {Input, Icon} from 'react-native-elements';
 
-import HeaderCustom from '../components/HeaderCustom';
+import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
 
 const LoginScreen = (props) => {
   return (
     <ScrollView>
       <KeyboardAvoidingView>
-        <HeaderCustom title={'Conecte-se'} />
+        <TitleCustom title={'Conecte-se'} />
         <View style={styles.containerTextBox}>
           <Input
             containerStyle={styles.inputContainerStyle}

@@ -29,7 +29,6 @@ function BemVindoScreen({navigation}) {
           colorText={'#70D1D3'}
           // eslint-disable-next-line react-native/no-inline-styles
           parametosStyle={{
-            ColorFundo: '#fff',
             widthBorder: 1,
             colorBorder: '#70D1D3',
             TopMargin: 20,
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#F3F1F1',
   },
   containerText: {
     flex: 1,

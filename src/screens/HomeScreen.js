@@ -1,51 +1,91 @@
-import React, { useState} from 'react';
-import {StyleSheet, Text, View, KeyboardAvoidingView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  KeyboardAvoidingView,
+} from 'react-native';
 
-import {Header} from 'react-native-elements';
-import ButtonCustom from '../components/ButtonCustom';
+import {Icon} from 'react-native-elements';
+
+import HeaderCustom from '../components/HeaderCustom';
+import ButtonHome from '../components/ButtonHome';
+import Carousel from '../components/Carousel';
 
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-
-function sair() {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-}
-
-function HomeScreen() {
+const HomeScreen = ({navigation}) => {
   const [nome, setNome] = useState('');
 
   firestore()
-  .collection('Users')
-  .doc(auth().currentUser.uid)
-  .get()
-  .then(documentSnapshot => {
-    if (documentSnapshot.exists) {
-      setNome(documentSnapshot.data().nome);
-    }
-  });
+    .collection('Users')
+    .doc(auth().currentUser.uid)
+    .get()
+    .then((documentSnapshot) => {
+      if (documentSnapshot.exists) {
+        setNome(documentSnapshot.data().nome);
+      }
+    });
 
   return (
-    <KeyboardAvoidingView>
-      <Header
-        placement="left"
-        leftComponent={{icon: 'menu', color: '#fff'}}
-        centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
-        rightComponent={{icon: 'home', color: '#fff'}}
-      />
-      <Text>Hello {nome} </Text>
-      <ButtonCustom
-        testValue={'Conecte-se'}
-        functionOnPress={() => sair()}
-        // eslint-disable-next-line react-native/no-inline-styles
-        parametosStyle={{ColorFundo: '#70D1D3'}}
-      />
+    <KeyboardAvoidingView style={{width: '100%', height: '100%'}}>
+      <HeaderCustom navigation={navigation}/>
+
+      <View style={styles.nomeContainer}>
+        <Text style={{fontSize: 22, color:'#000'}}>Olá,</Text>
+        <Text style={{fontSize: 26, color: '#000'}}>{nome}</Text>
+      </View>
+      <View style={styles.botoesContainer}>
+        <ButtonHome
+          ValorText={'Abastecimento'}
+          iconName={'faucet'}
+          functionOnPress={() => console.log('a')}
+        />
+        <ButtonHome
+          ValorText={'Dicas '}
+          iconName={'lightbulb'}
+          functionOnPress={() => console.log('a')}
+        />
+        <ButtonHome
+          ValorText={'Poluição'}
+          iconName={'smog'}
+          functionOnPress={() => console.log('a')}
+        />
+        <ButtonHome
+          ValorText={'Relatos'}
+          iconName={'comments'}
+          functionOnPress={() => console.log('a')}
+        />
+      </View>
+      <View style={styles.dicasContainer}>
+        <Text style={{fontSize: 18, paddingLeft: 30, marginBottom: 20, color: '#000'}}>Destaque</Text>
+        <Carousel />
+      </View>
     </KeyboardAvoidingView>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  nomeContainer: {
+    backgroundColor: '#F3F1F1',
+    flex: 1.5,
+    paddingLeft: 30,
+    justifyContent: 'center',
+  },
+  botoesContainer: {
+    backgroundColor: '#F3F1F1',
+    flex: 3,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dicasContainer: {
+    marginTop: 20,
+    flex: 3,
+    backgroundColor: '#F3F1F1',
+  },
+});
 
 export default HomeScreen;

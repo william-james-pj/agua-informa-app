@@ -1,24 +1,28 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const HeaderCustom = ({title}) => {
+import {Header, Icon} from 'react-native-elements';
+
+const HeaderCustom = ({navigation}) => {
   return (
-    <View style={styles.containerHeader}>
-      <Text style={styles.textHeaderStyle}>{title}</Text>
-    </View>
+    <Header
+      placement="left"
+      containerStyle={{backgroundColor: '#F3F1F1', paddingLeft: 30}}
+      leftComponent={
+        <Icon
+          containerStyle={{paddingRight: 16}}
+          type="font-awesome-5"
+          name="bars"
+          size={25}
+          color="#70D1D3"
+          onPress={() => navigation.openDrawer()}
+        />
+      }
+      centerComponent={{text: 'AppUpx', style: {color: '#000'}}}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  containerHeader: {
-    justifyContent: 'center',
-  },
-  textHeaderStyle: {
-    fontSize: 26,
-    color: '#70D1D3',
-    marginLeft: 10,
-    marginTop: 10,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default HeaderCustom;
