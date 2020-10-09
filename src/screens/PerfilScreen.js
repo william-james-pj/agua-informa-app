@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   KeyboardAvoidingView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -16,29 +17,48 @@ import * as Yup from 'yup';
 
 import {Input, Icon} from 'react-native-elements';
 
+import {AppStyles, LoaderStyle} from '../AppStyles';
 import HeaderCustom from '../components/HeaderCustom';
 import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
 
 const PerfilScreen = (props) => {
+  const [isLoading, setLoading] = useState(true);
   const [editavel, setEditavel] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
       setEditavel(true);
-      firestore()
+      props.setStatus({success: ''});
+    }, []),
+  );
+
+  User(auth().currentUser.uid);
+
+  function User(userId) {
+    useEffect(() => {
+      const subscriber = firestore()
         .collection('Users')
-        .doc(auth().currentUser.uid)
-        .get()
-        .then((documentSnapshot) => {
+        .doc(userId)
+        .onSnapshot((documentSnapshot) => {
           if (documentSnapshot.exists) {
             props.setFieldValue('nome', documentSnapshot.data().nome);
             props.setFieldValue('telefone', documentSnapshot.data().telefone);
             props.setFieldValue('cpf', documentSnapshot.data().cpf);
+            setLoading(false);
           }
         });
-    }, []),
-  );
+      return () => subscriber();
+    }, [userId]);
+  }
+
+  if (isLoading) {
+    return (
+      <View style={LoaderStyle.loaderContainer}>
+        <ActivityIndicator size="large" color={AppStyles.color.primary} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView>
@@ -48,7 +68,7 @@ const PerfilScreen = (props) => {
         <View style={styles.containerTextBox}>
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="Nome"
             placeholder="Nome"
             disabled={editavel}
@@ -56,7 +76,7 @@ const PerfilScreen = (props) => {
               <Icon
                 name="user"
                 type="font-awesome-5"
-                color="#c4c4c4"
+                color={AppStyles.color.cinza}
                 size={20}
               />
             }
@@ -68,7 +88,7 @@ const PerfilScreen = (props) => {
           <View style={styles.containerTextBoxRow}>
             <Input
               containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: '#70D1D3', fontSize: 12}}
+              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
               label="Celular"
               placeholder="Celular"
               disabled={editavel}
@@ -76,7 +96,7 @@ const PerfilScreen = (props) => {
                 <Icon
                   name="mobile-alt"
                   type="font-awesome-5"
-                  color="#c4c4c4"
+                  color={AppStyles.color.cinza}
                   size={20}
                 />
               }
@@ -90,7 +110,7 @@ const PerfilScreen = (props) => {
             />
             <Input
               containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: '#70D1D3', fontSize: 12}}
+              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
               label="CPF"
               placeholder="CPF"
               disabled={editavel}
@@ -98,7 +118,7 @@ const PerfilScreen = (props) => {
                 <Icon
                   name="id-card"
                   type="font-awesome-5"
-                  color="#c4c4c4"
+                  color={AppStyles.color.cinza}
                   size={20}
                 />
               }
@@ -114,12 +134,12 @@ const PerfilScreen = (props) => {
           <ButtonCustom
             testValue={'Editar'}
             functionOnPress={() => setEditavel(false)}
-            colorText={'#70D1D3'}
+            colorText={AppStyles.color.primary}
             // eslint-disable-next-line react-native/no-inline-styles
             parametosStyle={{
-              ColorFundo: '#f3f3f3',
+              ColorFundo: AppStyles.color.fundo,
               widthBorder: 1,
-              colorBorder: '#70D1D3',
+              colorBorder: AppStyles.color.primary,
               Width: '40%',
             }}
           />
@@ -130,13 +150,13 @@ const PerfilScreen = (props) => {
               props.handleSubmit();
               setEditavel(true);
             }}
-            parametosStyle={{ColorFundo: '#70D1D3', Width: '40%'}}
+            parametosStyle={{ColorFundo: AppStyles.color.primary, Width: '40%'}}
           />
         </View>
         <View style={styles.containerErro}>
-          {props.errors.message && (
+          {props.status && (
             <Text style={{fontSize: 12, color: 'green'}}>
-              {props.errors.message}
+              {props.status ? props.status.success : ''}
             </Text>
           )}
         </View>
@@ -195,14 +215,18 @@ export default withFormik({
       .required('Preencha o campo de CPF'),
   }),
 
-  handleSubmit: (values, {setSubmitting, setErrors}) => {
-    firestore().collection('Users').doc(auth().currentUser.uid).update({
-      nome: values.nome,
-      cpf: values.cpf,
-      telefone: values.telefone,
-    }).then(() => {
-      setSubmitting(false);
-      setErrors({message: 'Usuário atualizado com sucesso!'});
-    });
+  handleSubmit: (values, {setSubmitting, setStatus}) => {
+    firestore()
+      .collection('Users')
+      .doc(auth().currentUser.uid)
+      .update({
+        nome: values.nome,
+        cpf: values.cpf,
+        telefone: values.telefone,
+      })
+      .then(() => {
+        setSubmitting(false);
+        setStatus({success: 'Usuário atualizado com sucesso!'});
+      });
   },
 })(PerfilScreen);

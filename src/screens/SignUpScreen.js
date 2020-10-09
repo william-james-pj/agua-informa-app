@@ -15,6 +15,7 @@ import * as Yup from 'yup';
 
 import {Input, Icon} from 'react-native-elements';
 
+import {AppStyles} from '../AppStyles';
 import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
 
@@ -26,14 +27,14 @@ const SignUpScreen = (props) => {
         <View style={styles.containerTextBox}>
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="Nome"
             placeholder="Nome"
             leftIcon={
               <Icon
                 name="user"
                 type="font-awesome-5"
-                color="#c4c4c4"
+                color={AppStyles.color.cinza}
                 size={20}
               />
             }
@@ -44,14 +45,14 @@ const SignUpScreen = (props) => {
           />
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="E-mail"
             placeholder="E-mail"
             leftIcon={
               <Icon
                 name="envelope"
                 type="font-awesome-5"
-                color="#c4c4c4"
+                color= {AppStyles.color.cinza}
                 size={20}
               />
             }
@@ -64,14 +65,14 @@ const SignUpScreen = (props) => {
           <View style={styles.containerTextBoxRow}>
             <Input
               containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: '#70D1D3', fontSize: 12}}
+              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
               label="Celular"
               placeholder="Celular"
               leftIcon={
                 <Icon
                   name="mobile-alt"
                   type="font-awesome-5"
-                  color="#c4c4c4"
+                  color= {AppStyles.color.cinza}
                   size={20}
                 />
               }
@@ -85,14 +86,14 @@ const SignUpScreen = (props) => {
             />
             <Input
               containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: '#70D1D3', fontSize: 12}}
+              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
               label="CPF"
               placeholder="CPF"
               leftIcon={
                 <Icon
                   name="id-card"
                   type="font-awesome-5"
-                  color="#c4c4c4"
+                  color= {AppStyles.color.cinza}
                   size={20}
                 />
               }
@@ -105,14 +106,14 @@ const SignUpScreen = (props) => {
           </View>
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="Senha"
             placeholder="Senha"
             leftIcon={
               <Icon
                 name="lock"
                 type="font-awesome-5"
-                color="#c4c4c4"
+                color= {AppStyles.color.cinza}
                 size={20}
               />
             }
@@ -134,7 +135,7 @@ const SignUpScreen = (props) => {
           <ButtonCustom
             testValue={'Criar conta'}
             functionOnPress={() => props.handleSubmit()}
-            parametosStyle={{ColorFundo: '#70D1D3'}}
+            parametosStyle={{ColorFundo: AppStyles.color.primary}}
           />
         </View>
         <View style={styles.containerText}>
@@ -181,12 +182,12 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 12,
-    color: '#c4c4c4',
+    color: AppStyles.color.cinza,
     marginRight: 15,
   },
   textSignUp: {
     fontSize: 12,
-    color: '#70D1D3',
+    color: AppStyles.color.primary,
     textTransform: 'uppercase',
   },
   containerErro: {

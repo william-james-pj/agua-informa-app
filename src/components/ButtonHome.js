@@ -1,12 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+
+import {AppStyles} from '../AppStyles';
 
 const ButtonHome = ({ValorText, functionOnPress, iconName}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={functionOnPress}>
-      <Icon name={iconName} color="#2B3538" type="font-awesome-5" size={26} solid />
+      <Icon name={iconName} color={AppStyles.color.iconHome} type="font-awesome-5" size={26} solid />
       <Text style={styles.textStyle}>{ValorText}</Text>
     </TouchableOpacity>
   );
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   textStyle: {
-    color: '#2B3538',
+    color: AppStyles.color.iconHome,
     fontSize: 14,
     marginTop: 5,
   },

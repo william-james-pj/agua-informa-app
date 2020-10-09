@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import {StyleSheet, Text, View, KeyboardAvoidingView} from 'react-native';
 
+import {AppStyles} from '../AppStyles';
 import ButtonCustom from '../components/ButtonCustom';
 
 function BemVindoScreen({navigation}) {
@@ -21,16 +22,16 @@ function BemVindoScreen({navigation}) {
           testValue={'Conecte-se'}
           functionOnPress={() => navigation.navigate('Login')}
           // eslint-disable-next-line react-native/no-inline-styles
-          parametosStyle={{ColorFundo: '#70D1D3'}}
+          parametosStyle={{ColorFundo: AppStyles.color.primary}}
         />
         <ButtonCustom
           testValue={'Criar nova conta'}
           functionOnPress={() => navigation.navigate('SignUp')}
-          colorText={'#70D1D3'}
+          colorText={AppStyles.color.primary}
           // eslint-disable-next-line react-native/no-inline-styles
           parametosStyle={{
             widthBorder: 1,
-            colorBorder: '#70D1D3',
+            colorBorder: AppStyles.color.primary,
             TopMargin: 20,
           }}
         />
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#F3F1F1',
+    backgroundColor: AppStyles.color.fundo,
   },
   containerText: {
     flex: 1,
@@ -52,11 +53,11 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 26,
-    color: '#70D1D3',
+    color: AppStyles.color.primary,
   },
   subtitleStyle: {
     fontSize: 10,
-    color: '#C4C4C4',
+    color: AppStyles.color.cinza,
   },
   containerImg: {
     flex: 1,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   imgStyle: {
     width: '60%',
     height: '80%',
-    backgroundColor: '#C4C4C4',
+    backgroundColor: AppStyles.color.cinza,
     borderRadius: 20,
   },
   containerButton: {

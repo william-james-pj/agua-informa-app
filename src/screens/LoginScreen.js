@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 
 import {Input, Icon} from 'react-native-elements';
 
+import {AppStyles} from '../AppStyles';
 import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
 
@@ -25,7 +26,7 @@ const LoginScreen = (props) => {
         <View style={styles.containerTextBox}>
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="E-mail"
             placeholder="E-mail"
             leftIcon={
@@ -44,7 +45,7 @@ const LoginScreen = (props) => {
           />
           <Input
             containerStyle={styles.inputContainerStyle}
-            labelStyle={{color: '#70D1D3', fontSize: 12}}
+            labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
             label="Senha"
             placeholder="Senha"
             leftIcon={
@@ -70,7 +71,7 @@ const LoginScreen = (props) => {
           )}
         </View>
         <View style={[styles.containerText, {padding: 0}]}>
-          <Text style={{fontSize: 12, color: '#70D1D3'}}>
+          <Text style={{fontSize: 12, color: AppStyles.color.primary}}>
             Esqueceu a senha?
           </Text>
         </View>
@@ -79,7 +80,7 @@ const LoginScreen = (props) => {
             testValue={'Conecte-se'}
             functionOnPress={() => props.handleSubmit()}
             // eslint-disable-next-line react-native/no-inline-styles
-            parametosStyle={{ColorFundo: '#70D1D3'}}
+            parametosStyle={{ColorFundo: AppStyles.color.primary}}
           />
         </View>
         <View style={styles.containerText}>
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
+    backgroundColor: AppStyles.color.fundo,
   },
   containerButton: {
     alignItems: 'center',
@@ -118,12 +120,12 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 12,
-    color: '#c4c4c4',
+    color: AppStyles.color.cinza,
     marginRight: 15,
   },
   textSignUp: {
     fontSize: 12,
-    color: '#70D1D3',
+    color: AppStyles.color.primary,
     textTransform: 'uppercase',
   },
   containerErro: {

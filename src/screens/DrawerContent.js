@@ -8,10 +8,12 @@ import {Avatar, Icon} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
+import {AppStyles} from '../AppStyles';
+
 function sair() {
   auth()
     .signOut()
-    .then(() => console.log('User signed out!'));
+    .then(() => {});
 }
 
 export function DrawerContent(props) {
@@ -23,7 +25,8 @@ export function DrawerContent(props) {
     .get()
     .then((documentSnapshot) => {
       if (documentSnapshot.exists) {
-        setNome(documentSnapshot.data().nome);
+        let nome = documentSnapshot.data().nome.split(' ');
+        setNome(`${nome[0]} ${nome[1]}`);
       }
     });
   return (
@@ -33,11 +36,10 @@ export function DrawerContent(props) {
           <View style={styles.userInfoSection}>
             <View style={{flexDirection: 'row', marginTop: 15}}>
               <Avatar
+                size="medium"
                 rounded
-                source={{
-                  uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
-                }}
-                size={50}
+                icon={{name: 'user', type: 'font-awesome'}}
+                containerStyle={{backgroundColor: AppStyles.color.cinza}}
               />
               <View style={{marginLeft: 15, flexDirection: 'column'}}>
                 <Text style={styles.title}>{nome}</Text>
@@ -53,7 +55,7 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={() => <Icon name="user" type="font-awesome-5" />}
+              icon={() => <Icon name="user" solid type="font-awesome-5" />}
               label="Perfil"
               onPress={() => {
                 props.navigation.navigate('Perfil');
