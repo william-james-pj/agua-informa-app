@@ -26,7 +26,7 @@ export function DrawerContent(props) {
     .then((documentSnapshot) => {
       if (documentSnapshot.exists) {
         let nome = documentSnapshot.data().nome.split(' ');
-        setNome(`${nome[0]} ${nome[1]}`);
+        setNome(`${nome[0]} ${nome[1] ? nome[1] : ''}`);
       }
     });
   return (

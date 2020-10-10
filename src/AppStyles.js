@@ -8,6 +8,7 @@ export const AppStyles = {
     textColor: '#70D1D3',
     textColor2: '#2B3538',
     iconHome: '#2B3538',
+    inputColor: '#88929E',
   },
 };
 

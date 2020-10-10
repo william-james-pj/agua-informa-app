@@ -30,7 +30,7 @@ const HomeScreen = ({navigation}) => {
           if (documentSnapshot.exists) {
             // console.log('User data: ', documentSnapshot.data());
             let nome = (documentSnapshot.data().nome).split(' ');
-            setNome(`${nome[0]} ${nome[1]}`);
+            setNome(`${nome[0]} ${nome[1] ? nome[1] : ''}`);
             setLoading(false);
           }
         });

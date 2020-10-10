@@ -21,6 +21,7 @@ import {AppStyles, LoaderStyle} from '../AppStyles';
 import HeaderCustom from '../components/HeaderCustom';
 import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
+import TextInputCustom from '../components/TextInputCustom';
 
 const PerfilScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -86,47 +87,29 @@ const PerfilScreen = (props) => {
             errorMessage={props.touched.nome && props.errors.nome}
           />
           <View style={styles.containerTextBoxRow}>
-            <Input
-              containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
+          <TextInputCustom
               label="Celular"
               placeholder="Celular"
-              disabled={editavel}
-              leftIcon={
-                <Icon
-                  name="mobile-alt"
-                  type="font-awesome-5"
-                  color={AppStyles.color.cinza}
-                  size={20}
-                />
-              }
-              keyboardType={'number-pad'}
-              value={props.values.telefone ? props.values.telefone : ''}
-              onChangeText={(text) => {
-                props.setFieldValue('telefone', text);
-              }}
-              inputStyle={{fontSize: 14}}
+              mascara={'([00]) [0]-[0000]-[0000]'}
+              iconName={'mobile-alt'}
+              typeKeyboard={'number-pad'}
               errorMessage={props.touched.telefone && props.errors.telefone}
+              value={props.values.telefone}
+              onChangeText={(formatted, extracted) => {
+                props.setFieldValue('telefone', extracted);
+              }}
             />
-            <Input
-              containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
+            <TextInputCustom
               label="CPF"
               placeholder="CPF"
-              disabled={editavel}
-              leftIcon={
-                <Icon
-                  name="id-card"
-                  type="font-awesome-5"
-                  color={AppStyles.color.cinza}
-                  size={20}
-                />
-              }
-              value={props.values.cpf ? props.values.cpf : ''}
-              onChangeText={(text) => props.setFieldValue('cpf', text)}
-              keyboardType={'number-pad'}
-              inputStyle={{fontSize: 14}}
+              mascara={'[000].[000].[000]-[00]'}
+              iconName={'id-card'}
+              typeKeyboard={'number-pad'}
               errorMessage={props.touched.cpf && props.errors.cpf}
+              value={props.values.cpf}
+              onChangeText={(formatted, extracted) => {
+                props.setFieldValue('cpf', extracted);
+              }}
             />
           </View>
         </View>

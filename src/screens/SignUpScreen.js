@@ -18,6 +18,7 @@ import {Input, Icon} from 'react-native-elements';
 import {AppStyles} from '../AppStyles';
 import TitleCustom from '../components/TitleCustom';
 import ButtonCustom from '../components/ButtonCustom';
+import TextInputCustom from '../components/TextInputCustom';
 
 const SignUpScreen = (props) => {
   return (
@@ -52,7 +53,7 @@ const SignUpScreen = (props) => {
               <Icon
                 name="envelope"
                 type="font-awesome-5"
-                color= {AppStyles.color.cinza}
+                color={AppStyles.color.cinza}
                 size={20}
               />
             }
@@ -63,28 +64,31 @@ const SignUpScreen = (props) => {
             errorMessage={props.touched.email && props.errors.email}
           />
           <View style={styles.containerTextBoxRow}>
-            <Input
-              containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
+            <TextInputCustom
               label="Celular"
               placeholder="Celular"
-              leftIcon={
-                <Icon
-                  name="mobile-alt"
-                  type="font-awesome-5"
-                  color= {AppStyles.color.cinza}
-                  size={20}
-                />
-              }
-              keyboardType={'number-pad'}
-              value={props.values.telefone}
-              onChangeText={(text) => {
-                props.setFieldValue('telefone', text);
-              }}
-              inputStyle={{fontSize: 14}}
+              mascara={'([00]) [0]-[0000]-[0000]'}
+              iconName={'mobile-alt'}
+              typeKeyboard={'number-pad'}
               errorMessage={props.touched.telefone && props.errors.telefone}
+              value={props.values.telefone}
+              onChangeText={(formatted, extracted) => {
+                props.setFieldValue('telefone', extracted);
+              }}
             />
-            <Input
+            <TextInputCustom
+              label="CPF"
+              placeholder="CPF"
+              mascara={'[000].[000].[000]-[00]'}
+              iconName={'id-card'}
+              typeKeyboard={'number-pad'}
+              errorMessage={props.touched.cpf && props.errors.cpf}
+              value={props.values.cpf}
+              onChangeText={(formatted, extracted) => {
+                props.setFieldValue('cpf', extracted);
+              }}
+            />
+            {/* <Input
               containerStyle={styles.inputContainerStyle2}
               labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
               label="CPF"
@@ -93,7 +97,7 @@ const SignUpScreen = (props) => {
                 <Icon
                   name="id-card"
                   type="font-awesome-5"
-                  color= {AppStyles.color.cinza}
+                  color={AppStyles.color.cinza}
                   size={20}
                 />
               }
@@ -102,7 +106,7 @@ const SignUpScreen = (props) => {
               keyboardType={'number-pad'}
               inputStyle={{fontSize: 14}}
               errorMessage={props.touched.cpf && props.errors.cpf}
-            />
+            /> */}
           </View>
           <Input
             containerStyle={styles.inputContainerStyle}
@@ -113,7 +117,7 @@ const SignUpScreen = (props) => {
               <Icon
                 name="lock"
                 type="font-awesome-5"
-                color= {AppStyles.color.cinza}
+                color={AppStyles.color.cinza}
                 size={20}
               />
             }
