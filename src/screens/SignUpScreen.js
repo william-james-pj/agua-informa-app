@@ -88,25 +88,6 @@ const SignUpScreen = (props) => {
                 props.setFieldValue('cpf', extracted);
               }}
             />
-            {/* <Input
-              containerStyle={styles.inputContainerStyle2}
-              labelStyle={{color: AppStyles.color.primary, fontSize: 12}}
-              label="CPF"
-              placeholder="CPF"
-              leftIcon={
-                <Icon
-                  name="id-card"
-                  type="font-awesome-5"
-                  color={AppStyles.color.cinza}
-                  size={20}
-                />
-              }
-              value={props.values.cpf}
-              onChangeText={(text) => props.setFieldValue('cpf', text)}
-              keyboardType={'number-pad'}
-              inputStyle={{fontSize: 14}}
-              errorMessage={props.touched.cpf && props.errors.cpf}
-            /> */}
           </View>
           <Input
             containerStyle={styles.inputContainerStyle}

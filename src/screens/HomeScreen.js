@@ -62,22 +62,22 @@ const HomeScreen = ({navigation}) => {
         <ButtonHome
           ValorText={'Abastecimento'}
           iconName={'faucet'}
-          functionOnPress={() => console.log('a')}
+          functionOnPress={() => {}}
         />
         <ButtonHome
           ValorText={'Dicas '}
           iconName={'lightbulb'}
-          functionOnPress={() => console.log('a')}
+          functionOnPress={() => {}}
         />
         <ButtonHome
           ValorText={'Poluição'}
           iconName={'smog'}
-          functionOnPress={() => console.log('a')}
+          functionOnPress={() => {}}
         />
         <ButtonHome
           ValorText={'Relatos'}
           iconName={'comments'}
-          functionOnPress={() => console.log('a')}
+          functionOnPress={() => {}}
         />
       </View>
       <View style={styles.dicasContainer}>

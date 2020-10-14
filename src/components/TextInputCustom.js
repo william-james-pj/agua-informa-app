@@ -7,39 +7,31 @@ import TextInputMask from 'react-native-text-input-mask';
 
 import {Icon} from 'react-native-elements';
 
-const TextInputCustom = ({
-  label,
-  placeholder,
-  mascara,
-  iconName,
-  typeKeyboard,
-  errorMessage,
-  value,
-  onChangeText,
-}) => {
+const TextInputCustom = (props) => {
   return (
-    <View style={[styles.container, errorMessage ? {top: 2} : null]}>
-      <Text style={styles.label}>{label}</Text>
+    <View style={[styles.container, props.errorMessage ? {top: 2} : null]}>
+      <Text style={styles.label}>{props.label}</Text>
       <View style={styles.containerInput}>
         <Icon
-          name={iconName}
+          name={props.iconName}
           type="font-awesome-5"
           color={AppStyles.color.cinza}
           size={20}
           style={{top: 13, marginRight: 5}}
         />
         <TextInputMask
-          keyboardType={typeKeyboard}
-          style={styles.inputStyle}
-          mask={mascara}
+          editable={!props.disabled ? true : false}
+          keyboardType={props.typeKeyboard}
+          style={[styles.inputStyle, {color: !props.disabled ? '#000' : AppStyles.color.inputColor}]}
+          mask={props.mascara}
           placeholderTextColor={AppStyles.color.inputColor}
-          placeholder={placeholder}
-          value={value}
-          onChangeText={onChangeText}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChangeText={props.onChangeText}
         />
       </View>
-      <Text style={[styles.textErro, estiloVariavel(errorMessage)]}>
-        {errorMessage}
+      <Text style={[styles.textErro, estiloVariavel(props.errorMessage)]}>
+        {props.errorMessage}
       </Text>
     </View>
   );
@@ -79,7 +71,6 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     width: '100%',
-    color: '#000',
   },
   textErro: {
     color: 'red',

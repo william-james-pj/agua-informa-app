@@ -88,6 +88,7 @@ const PerfilScreen = (props) => {
           />
           <View style={styles.containerTextBoxRow}>
           <TextInputCustom
+              disabled={editavel}
               label="Celular"
               placeholder="Celular"
               mascara={'([00]) [0]-[0000]-[0000]'}
@@ -100,6 +101,7 @@ const PerfilScreen = (props) => {
               }}
             />
             <TextInputCustom
+              disabled={editavel}
               label="CPF"
               placeholder="CPF"
               mascara={'[000].[000].[000]-[00]'}
