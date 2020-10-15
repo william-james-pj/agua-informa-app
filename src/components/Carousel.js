@@ -6,12 +6,11 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Platform,
   Image,
   ActivityIndicator,
 } from 'react-native';
 
-import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
 import {Overlay} from 'react-native-elements';
@@ -35,29 +34,27 @@ const CarouselHome = (props) => {
   };
 
   useEffect(() => {
-    database()
-      .ref('modalDestaque')
-      .once('value')
-      .then(function (snapshot) {
-        // console.log(snapshot.val());
+    firestore()
+      .collection('ModalDestaque')
+      .get()
+      .then((querySnapshot) => {
         let items = [];
-
-        snapshot.forEach((child) => {
+        let x = 0;
+        querySnapshot.forEach((documentSnapshot) => {
           storage()
-            .ref('imgDestaques/' + child.val().url)
+            .ref('imgDestaques/' + documentSnapshot.data().url)
             .getDownloadURL()
             .then((urlImg) => {
-              // console.log(urlImg);
               items.push({
-                title: child.val().title,
+                title: documentSnapshot.data().title,
                 url: urlImg,
-                texto: child.val().texto,
-                ref: child.val().ref,
+                texto: documentSnapshot.data().text,
+                ref: documentSnapshot.data().ref,
               });
-              setLoading(false);
+              x++;
+              x >= querySnapshot.size ? setLoading(false) : null;
             });
         });
-        // console.log(items);
         setFirebaseItems(items);
       });
   }, []);

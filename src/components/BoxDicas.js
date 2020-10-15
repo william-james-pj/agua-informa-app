@@ -5,11 +5,11 @@ import {Icon} from 'react-native-elements';
 
 import {AppStyles} from '../AppStyles';
 
-const BoxDicas = ({title, texto, icon}) => {
+const BoxDicas = ({title, texto, icon, index}) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
-        <Text style={styles.textHeader}>{title}</Text>
+        <Text style={styles.textHeader}>{`${index + 1} - ${title}`}</Text>
         <Icon
           name={icon}
           color={AppStyles.color.iconHome}

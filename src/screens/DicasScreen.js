@@ -55,7 +55,7 @@ const DicasScreen = (props) => {
         <View style={styles.container}>
           {dicas.map((dica, index) => {
             return (
-              <BoxDicas key={index} title={dica.title} texto={dica.texto} icon={dica.icon}/>
+              <BoxDicas key={index} index={index} title={dica.title} texto={dica.texto} icon={dica.icon}/>
               );
           })}
         </View>
