@@ -67,7 +67,7 @@ const HomeScreen = ({navigation}) => {
         <ButtonHome
           ValorText={'Dicas '}
           iconName={'lightbulb'}
-          functionOnPress={() => {}}
+          functionOnPress={() => { navigation.navigate('Dicas');}}
         />
         <ButtonHome
           ValorText={'Poluição'}

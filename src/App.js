@@ -3,10 +3,10 @@ import React, {useState, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 
 import {NavigationContainer} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import { DrawerContent } from './screens/DrawerContent';
+import {DrawerContent} from './screens/DrawerContent';
 
 import BemVindoScreen from './screens/BemVindoScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -14,6 +14,7 @@ import SignUpScreen from './screens/SignUpScreen';
 
 import HomeScreen from './screens/HomeScreen';
 import PerfilScreen from './screens/PerfilScreen';
+import DicasScreen from './screens/DicasScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -60,9 +61,10 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Perfil" component={PerfilScreen} />
+        <Drawer.Screen name="Dicas" component={DicasScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
