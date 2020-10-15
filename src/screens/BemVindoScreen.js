@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, KeyboardAvoidingView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Image,
+} from 'react-native';
 
 import {AppStyles} from '../AppStyles';
 import ButtonCustom from '../components/ButtonCustom';
@@ -15,7 +21,13 @@ function BemVindoScreen({navigation}) {
         <Text style={styles.subtitleStyle}>usando nosso aplicativo</Text>
       </View>
       <View style={styles.containerImg}>
-        <View style={styles.imgStyle} />
+        <View style={styles.imgStyle}>
+          <Image
+            resizeMode="contain"
+            style={styles.img}
+            source={require('../../assets/img/iconupx.png')}
+          />
+        </View>
       </View>
       <View style={styles.containerButton}>
         <ButtonCustom
@@ -67,8 +79,12 @@ const styles = StyleSheet.create({
   imgStyle: {
     width: '60%',
     height: '80%',
-    backgroundColor: AppStyles.color.cinza,
     borderRadius: 20,
+  },
+  img: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
   },
   containerButton: {
     flex: 1,

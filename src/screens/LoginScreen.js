@@ -153,7 +153,7 @@ export default withFormik({
   handleSubmit: (values, {setSubmitting, setErrors}) => {
     auth()
       .signInWithEmailAndPassword(values.email, values.senha)
-      .then((value) => console.log(value))
+      .then((value) => {})
       .catch((error) => {
         setSubmitting(false);
         if (error.code === 'auth/wrong-password') {

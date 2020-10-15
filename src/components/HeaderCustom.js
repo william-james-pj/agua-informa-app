@@ -18,7 +18,7 @@ const HeaderCustom = ({navigation}) => {
           onPress={() => navigation.openDrawer()}
         />
       }
-      centerComponent={{text: 'AppUpx', style: {color: '#000'}}}
+      centerComponent={{text: 'Água Informa', style: {color: '#000'}}}
     />
   );
 };
