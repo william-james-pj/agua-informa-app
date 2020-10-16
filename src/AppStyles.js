@@ -1,5 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
+const {width: screenWidth} = Dimensions.get('window');
+
 export const AppStyles = {
   color: {
     fundo: '#F3F1F1',
@@ -18,5 +20,21 @@ export const LoaderStyle = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: AppStyles.color.fundo,
+  },
+};
+
+function fontSizer() {
+  if (screenWidth > 400) {
+    return 28;
+  } else if (screenWidth > 250) {
+    return 26;
+  } else {
+    return 22;
+  }
+}
+
+export const TextTitleSize = {
+  size: {
+    tamanho : fontSizer(),
   },
 };

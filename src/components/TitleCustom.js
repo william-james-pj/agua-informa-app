@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import {TextTitleSize} from '../AppStyles';
 
 const TitleCustom = ({title, colorText}) => {
   return (
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textHeaderStyle: {
-    fontSize: 26,
+    fontSize: TextTitleSize.size.tamanho,
     marginLeft: 10,
     marginTop: 10,
   },

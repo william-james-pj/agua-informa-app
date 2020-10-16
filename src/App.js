@@ -15,6 +15,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
 import PerfilScreen from './screens/PerfilScreen';
 import DicasScreen from './screens/DicasScreen';
+import PoluicaoScreen from './screens/PoluicaoScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -65,6 +66,7 @@ function App() {
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Perfil" component={PerfilScreen} />
         <Drawer.Screen name="Dicas" component={DicasScreen} />
+        <Drawer.Screen name="Poluicao" component={PoluicaoScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

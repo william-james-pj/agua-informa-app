@@ -15,13 +15,13 @@ import TitleCustom from '../components/TitleCustom';
 
 import firestore from '@react-native-firebase/firestore';
 
-const DicasScreen = (props) => {
+const PoluicaoScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
-  const [dicas, setDicas] = useState([]);
+  const [poluicao, setPoluicao] = useState([]);
 
   useEffect(() => {
     firestore()
-      .collection('Dicas')
+      .collection('Poluicao')
       .get()
       .then((querySnapshot) => {
         let items = [];
@@ -30,12 +30,11 @@ const DicasScreen = (props) => {
           items.push({
             title: documentSnapshot.data().title,
             texto: documentSnapshot.data().text,
-            icon: documentSnapshot.data().icon,
           });
           x++;
-          (x >= querySnapshot.size) ? setLoading(false) : null;
+          x >= querySnapshot.size ? setLoading(false) : null;
         });
-        setDicas(items);
+        setPoluicao(items);
       });
   }, []);
 
@@ -51,14 +50,16 @@ const DicasScreen = (props) => {
     <View style={{flex: 1}}>
       <HeaderCustom navigation={props.navigation} />
       <ScrollView>
-      <TitleCustom title={'Dicas de Economia'} />
-        <View style={styles.container}>
-          {dicas.map((dica, index) => {
-            return (
-              <BoxTextos key={index} index={index} title={dica.title} texto={dica.texto} icon={dica.icon}/>
-              );
-          })}
-        </View>
+        {poluicao.map((item, index) => {
+          return (
+            <View key={index + 100} style={styles.container}>
+              <TitleCustom title={item.title} />
+              <View style={{alignItems: 'center'}}>
+                <BoxTextos texto={item.texto.split('\\n').join('\n\n')} />
+              </View>
+            </View>
+          );
+        })}
       </ScrollView>
     </View>
   );
@@ -67,9 +68,8 @@ const DicasScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    marginBottom: 50,
+    marginBottom: 20,
   },
 });
 
-export default DicasScreen;
+export default PoluicaoScreen;

@@ -5,19 +5,27 @@ import {Icon} from 'react-native-elements';
 
 import {AppStyles} from '../AppStyles';
 
-const BoxDicas = ({title, texto, icon, index}) => {
+const BoxTextos = ({title, texto, icon, index}) => {
+  function header() {
+    if (icon || title) {
+      return (
+        <View style={styles.header}>
+          <Text style={styles.textHeader}>{`${index + 1} - ${title}`}</Text>
+          <Icon
+            name={icon}
+            color={AppStyles.color.iconHome}
+            type="font-awesome-5"
+            size={30}
+            solid
+          />
+        </View>
+      );
+    }
+  }
+
   return (
-    <View style={styles.boxContainer}>
-      <View style={styles.header}>
-        <Text style={styles.textHeader}>{`${index + 1} - ${title}`}</Text>
-        <Icon
-          name={icon}
-          color={AppStyles.color.iconHome}
-          type="font-awesome-5"
-          size={30}
-          solid
-        />
-      </View>
+    <View style={[styles.boxContainer]}>
+      {header()}
       <View style={styles.textContainer}>
         <Text style={{textAlign: 'justify'}}>{texto}</Text>
       </View>
@@ -30,13 +38,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
     width: '90%',
-    height: 180,
+    height: 'auto',
     marginTop: 20,
     overflow: 'hidden',
   },
   header: {
     width: '100%',
-    height: '30%',
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
@@ -47,10 +55,11 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    height: '70%',
+    height: 'auto',
     padding: 20,
+    paddingBottom: 30,
     alignItems: 'center',
   },
 });
 
-export default BoxDicas;
+export default BoxTextos;
