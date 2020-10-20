@@ -3,11 +3,11 @@ import {StyleSheet} from 'react-native';
 
 import {Header, Icon} from 'react-native-elements';
 
-const HeaderCustom = ({navigation}) => {
+const HeaderCustom = ({navigation, color = '#f3f1f1'}) => {
   return (
     <Header
       placement="left"
-      containerStyle={{backgroundColor: '#F3F1F1', paddingLeft: 30}}
+      containerStyle={{backgroundColor: color, paddingLeft: 30}}
       leftComponent={
         <Icon
           containerStyle={{paddingRight: 16}}

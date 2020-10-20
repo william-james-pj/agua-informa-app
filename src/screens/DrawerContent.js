@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
@@ -8,7 +8,7 @@ import {Avatar, Icon} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-import {AppStyles} from '../AppStyles';
+import {AppStyles, LoaderStyle} from '../AppStyles';
 
 function sair() {
   auth()
@@ -17,18 +17,37 @@ function sair() {
 }
 
 export function DrawerContent(props) {
+  const [isLoading, setLoading] = useState(true);
   const [nome, setNome] = useState('');
 
-  firestore()
-    .collection('Users')
-    .doc(auth().currentUser.uid)
-    .get()
-    .then((documentSnapshot) => {
-      if (documentSnapshot.exists) {
-        let nome = documentSnapshot.data().nome.split(' ');
-        setNome(`${nome[0]} ${nome[1] ? nome[1] : ''}`);
-      }
-    });
+  User(auth().currentUser.uid);
+
+  function User(userId) {
+    useEffect(() => {
+      const subscriber = firestore()
+        .collection('Users')
+        .doc(userId)
+        .onSnapshot((documentSnapshot) => {
+          if (documentSnapshot.exists) {
+            // console.log('User data: ', documentSnapshot.data());
+            let nome = (documentSnapshot.data().nome).split(' ');
+            setNome(`${nome[0]} ${nome[1] ? nome[1] : ''}`);
+            setLoading(false);
+          }
+        });
+
+      return () => subscriber();
+    }, [userId]);
+  }
+
+  if (isLoading) {
+    return (
+      <View style={LoaderStyle.loaderContainer}>
+        <ActivityIndicator size="large" color={AppStyles.color.primary} />
+      </View>
+    );
+  }
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView>

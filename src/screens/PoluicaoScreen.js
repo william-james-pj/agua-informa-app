@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import {AppStyles, LoaderStyle} from '../AppStyles';
-import HeaderCustom from '../components/HeaderCustom';
 import BoxTextos from '../components/BoxTextos';
 import TitleCustom from '../components/TitleCustom';
 
@@ -48,7 +47,6 @@ const PoluicaoScreen = (props) => {
 
   return (
     <View style={{flex: 1}}>
-      <HeaderCustom navigation={props.navigation} />
       <ScrollView>
         {poluicao.map((item, index) => {
           return (

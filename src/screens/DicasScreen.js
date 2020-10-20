@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
 
 import {AppStyles, LoaderStyle} from '../AppStyles';
-import HeaderCustom from '../components/HeaderCustom';
 import BoxTextos from '../components/BoxTextos';
 import TitleCustom from '../components/TitleCustom';
 
@@ -49,7 +46,6 @@ const DicasScreen = (props) => {
 
   return (
     <View style={{flex: 1}}>
-      <HeaderCustom navigation={props.navigation} />
       <ScrollView>
       <TitleCustom title={'Dicas de Economia'} />
         <View style={styles.container}>

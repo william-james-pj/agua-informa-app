@@ -157,7 +157,7 @@ export default withFormik({
       .catch((error) => {
         setSubmitting(false);
         if (error.code === 'auth/wrong-password') {
-          setErrors({message: 'E-mail ou senha inválida'});
+          setErrors({message: 'Senha inválida'});
         } else if (error.code === 'auth/user-not-found') {
           setErrors({
             message: 'Nenhum usuário correspondente ao e-mail fornecido',

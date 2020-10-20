@@ -29,7 +29,7 @@ const HomeScreen = ({navigation}) => {
         .onSnapshot((documentSnapshot) => {
           if (documentSnapshot.exists) {
             // console.log('User data: ', documentSnapshot.data());
-            let nome = (documentSnapshot.data().nome).split(' ');
+            let nome = documentSnapshot.data().nome.split(' ');
             setNome(`${nome[0]} ${nome[1] ? nome[1] : ''}`);
             setLoading(false);
           }
@@ -67,17 +67,26 @@ const HomeScreen = ({navigation}) => {
         <ButtonHome
           ValorText={'Dicas '}
           iconName={'lightbulb'}
-          functionOnPress={() => { navigation.navigate('Dicas');}}
+          functionOnPress={() => {
+            navigation.navigate('Dicas');
+          }}
         />
         <ButtonHome
           ValorText={'Poluição'}
           iconName={'smog'}
-          functionOnPress={() => {navigation.navigate('Poluicao');}}
+          functionOnPress={() => {
+            navigation.navigate('Poluicao');
+          }}
         />
         <ButtonHome
           ValorText={'Relatos'}
           iconName={'comments'}
-          functionOnPress={() => {}}
+          functionOnPress={() => {
+            navigation.navigate('Relatos', {
+              screen: 'Relatos',
+              params: {name: nome, uid: auth().currentUser.uid},
+            });
+          }}
         />
       </View>
       <View style={styles.dicasContainer}>
