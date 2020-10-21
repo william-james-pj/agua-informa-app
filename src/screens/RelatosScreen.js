@@ -37,12 +37,21 @@ const RelatosScreen = (props) => {
         let items = [];
         let x = 0;
         documentSnapshot.forEach((item) => {
-          items.push({
-            name: item.data().name,
-            text: item.data().text,
-          });
-          x++;
-          x >= documentSnapshot.size ? setLoading(false) : null;
+          const sub = firestore()
+            .collection('Users')
+            .doc(item.data().uid)
+            .onSnapshot((documentSnapshot2) => {
+              if (documentSnapshot2.exists) {
+                let nome = documentSnapshot2.data().nome.split(' ');
+                items.push({
+                  name: `${nome[0]} ${nome[1] ? nome[1] : ''}`,
+                  text: item.data().text,
+                });
+                x++;
+                x >= documentSnapshot.size ? setLoading(false) : null;
+              }
+            });
+            return () => sub();
         });
         setTwitch(items);
       });

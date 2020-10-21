@@ -120,15 +120,13 @@ const styles = StyleSheet.create({
 });
 
 export default withFormik({
-  mapPropsToValues: ({name, uid}) => ({
-    name: name,
+  mapPropsToValues: ({uid}) => ({
     text: '',
     uid: uid,
   }),
 
   validationSchema: Yup.object().shape({
     text: Yup.string().required('Preencha o campo de senha'),
-    name: Yup.string().required('Preencha o campo de senha'),
   }),
 
   handleSubmit: (values, {setSubmitting, setErrors}) => {
@@ -136,7 +134,6 @@ export default withFormik({
       .collection('RelatosTwitch')
       .add({
         uid: values.uid,
-        name: values.name,
         text: values.text,
         date: new Date(),
       })

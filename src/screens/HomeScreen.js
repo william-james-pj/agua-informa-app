@@ -84,7 +84,7 @@ const HomeScreen = ({navigation}) => {
           functionOnPress={() => {
             navigation.navigate('Relatos', {
               screen: 'Relatos',
-              params: {name: nome, uid: auth().currentUser.uid},
+              params: {uid: auth().currentUser.uid},
             });
           }}
         />

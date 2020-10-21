@@ -9,7 +9,12 @@ import {Icon} from 'react-native-elements';
 
 const TextInputCustom = (props) => {
   return (
-    <View style={[styles.container, props.errorMessage ? {top: 2} : null]}>
+    <View
+      style={[
+        styles.container,
+        props.errorMessage ? {top: 2} : null,
+        props.full ? {width: '100%'} : {width: '40%'},
+      ]}>
       <Text style={styles.label}>{props.label}</Text>
       <View style={styles.containerInput}>
         <Icon
@@ -22,7 +27,10 @@ const TextInputCustom = (props) => {
         <TextInputMask
           editable={!props.disabled ? true : false}
           keyboardType={props.typeKeyboard}
-          style={[styles.inputStyle, {color: !props.disabled ? '#000' : AppStyles.color.inputColor}]}
+          style={[
+            styles.inputStyle,
+            {color: !props.disabled ? '#000' : AppStyles.color.inputColor},
+          ]}
           mask={props.mascara}
           placeholderTextColor={AppStyles.color.inputColor}
           placeholder={props.placeholder}
@@ -46,7 +54,6 @@ let estiloVariavel = function (errorMessage) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '40%',
     alignItems: 'flex-start',
     paddingLeft: 10,
     justifyContent: 'center',
