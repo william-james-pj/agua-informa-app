@@ -56,6 +56,7 @@ const PerfilScreen = ({navigation}) => {
           let x = 0;
           documentSnapshot.forEach((item) => {
             items.push({
+              id: item.id,
               name: nome,
               text: item.data().text,
             });
@@ -64,8 +65,11 @@ const PerfilScreen = ({navigation}) => {
           });
           setTwitch(items);
         });
-      return () => subscriber2();
-    }, [visible]);
+      return () => {
+        subscriber2();
+        setLoading(false);
+      };
+    }, [visible || nome]);
   }
 
   if (isLoading) {
@@ -103,17 +107,30 @@ const PerfilScreen = ({navigation}) => {
             </Text>
           </View>
         </View>
-        {twitch === {}
-          ? noIdeias()
-          : twitch.map((item, index) => {
-              return (
-                <RelatosTwitchScreen
-                  key={index}
-                  name={item.name}
-                  text={item.text}
-                />
-              );
-            })}
+        {twitch.length === 0 ? (
+          <View style={styles.boxInicio}>
+            <Icon
+              name={'sad-tear'}
+              color={AppStyles.color.primary}
+              type="font-awesome-5"
+              size={35}
+            />
+            <Text style={styles.textBox}>
+              Você ainda não compartilhou suas ideias e dicas com a comunidade
+            </Text>
+          </View>
+        ) : (
+          twitch.map((item, index) => {
+            return (
+              <RelatosTwitchScreen
+                id={item.id}
+                key={item.id}
+                name={item.name}
+                text={item.text}
+              />
+            );
+          })
+        )}
       </ScrollView>
       <Overlay
         fullScreen
@@ -125,22 +142,6 @@ const PerfilScreen = ({navigation}) => {
     </View>
   );
 };
-
-function noIdeias() {
-  return (
-    <View style={styles.boxInicio}>
-      <Icon
-        name={'sad-tear'}
-        color={AppStyles.color.primary}
-        type="font-awesome-5"
-        size={35}
-      />
-      <Text style={styles.textBox}>
-        Você ainda não compartilhou suas ideias e dicas com a comunidade
-      </Text>
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   headerContainer: {

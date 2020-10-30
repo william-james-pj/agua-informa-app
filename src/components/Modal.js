@@ -45,7 +45,7 @@ const Modal = ({close, item}) => {
         </View>
         <View style={styles.textContainer}>
           <Text style={{textAlign: 'justify'}}>
-            {item.texto.split('\\n').join('\n\n')}
+            {item.texto.split('\\n').join('\n\n').split('\\m').join('\n')}
           </Text>
         </View>
         <View style={styles.referenciaContainer}>
