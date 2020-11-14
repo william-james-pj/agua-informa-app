@@ -5,13 +5,19 @@ import { Icon } from 'react-native-elements';
 
 import {AppStyles} from '../AppStyles';
 
-const ButtonHome = ({ValorText, functionOnPress, iconName}) => {
+const ButtonHome = ({ValorText, functionOnPress, iconName, Height}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={functionOnPress}>
+    <TouchableOpacity style={[styles.button, estiloVariavel(Height)]} onPress={functionOnPress}>
       <Icon name={iconName} color={AppStyles.color.iconHome} type="font-awesome-5" size={26} solid />
       <Text style={styles.textStyle}>{ValorText}</Text>
     </TouchableOpacity>
   );
+};
+
+let estiloVariavel = function (Height) {
+  return {
+    height: Height ? Height : '45%',
+  };
 };
 
 const styles = StyleSheet.create({
@@ -19,7 +25,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '40%',
-    height: '45%',
     borderRadius: 20,
     backgroundColor: '#fff',
     margin: 10,
@@ -29,6 +34,7 @@ const styles = StyleSheet.create({
     color: AppStyles.color.iconHome,
     fontSize: 14,
     marginTop: 5,
+    textAlign: 'center',
   },
 });
 

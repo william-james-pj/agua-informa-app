@@ -62,7 +62,9 @@ const HomeScreen = ({navigation}) => {
         <ButtonHome
           ValorText={'Abastecimento'}
           iconName={'faucet'}
-          functionOnPress={() => {}}
+          functionOnPress={() => {
+            navigation.navigate('Abastecimento');
+          }}
         />
         <ButtonHome
           ValorText={'Dicas '}

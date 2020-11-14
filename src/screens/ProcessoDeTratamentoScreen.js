@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, ScrollView, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator, ScrollView} from 'react-native';
 
 import {AppStyles, LoaderStyle} from '../AppStyles';
-import BoxTextos from '../components/BoxTextos';
 import TitleCustom from '../components/TitleCustom';
+import BoxTextos from '../components/BoxTextos';
 
 import firestore from '@react-native-firebase/firestore';
 
-const DicasScreen = (props) => {
+const ProcessoDeTratamentoScreen = () => {
   const [isLoading, setLoading] = useState(true);
-  const [dicas, setDicas] = useState([]);
+  const [processos, setProcessos] = useState([]);
 
   useEffect(() => {
     firestore()
-      .collection('Dicas')
+      .collection('ProcessosDeTratamento')
       .get()
       .then((querySnapshot) => {
         let items = [];
@@ -22,12 +22,11 @@ const DicasScreen = (props) => {
           items.push({
             title: documentSnapshot.data().title,
             texto: documentSnapshot.data().text,
-            icon: documentSnapshot.data().icon,
           });
           x++;
           x >= querySnapshot.size ? setLoading(false) : null;
         });
-        setDicas(items);
+        setProcessos(items);
       });
   }, []);
 
@@ -40,22 +39,21 @@ const DicasScreen = (props) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <ScrollView>
-        <TitleCustom title={'Dicas de Economia'} />
-        <View style={styles.container}>
-          {dicas.map((dica, index) => {
-            return (
-              <BoxTextos
-                key={index}
-                index={index}
-                title={dica.title}
-                texto={dica.texto}
-                icon={dica.icon}
-              />
-            );
-          })}
-        </View>
+      <TitleCustom title={'Processo de tratamento'} />
+      <View style={styles.container}>
+        {processos.map((processo, index) => {
+          return (
+            <BoxTextos
+              key={`processos-${index}`}
+              index={index}
+              title={processo.title}
+              texto={processo.texto}
+            />
+          );
+        })}
+      </View>
       </ScrollView>
     </View>
   );
@@ -69,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DicasScreen;
+export default ProcessoDeTratamentoScreen;

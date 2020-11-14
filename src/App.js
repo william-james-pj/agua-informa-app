@@ -23,6 +23,11 @@ import PoluicaoScreen from './screens/PoluicaoScreen';
 import RelatosScreen from './screens/RelatosScreen';
 import GraficoScreen from './screens/GraficosScreen';
 
+import AbastecimentoScreen from './screens/AbastecimentoScreen';
+import ProcessoDeTratamentoScreen from './screens/ProcessoDeTratamentoScreen';
+import CrisesHidricasScreen from './screens/CrisesHidricasScreen';
+import RepresasScreen from './screens/RepresasScreen';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -133,23 +138,37 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen name="Dicas" component={DicasScreen} />
+        <Stack.Screen name="Abastecimento" component={AbastecimentoScreen} />
         <Stack.Screen name="Poluicao" component={PoluicaoScreen} />
         <Stack.Screen
           name="Relatos"
           component={tab}
           options={{
-          headerTitle: false,
-          headerTintColor: '#70D1D3',
-          headerStyle: {
-            backgroundColor: '#fff',
-            shadowOpacity: 0,
-            shadowOffset: {
-              height: 0,
+            headerTitle: false,
+            headerTintColor: '#70D1D3',
+            headerStyle: {
+              backgroundColor: '#fff',
+              shadowOpacity: 0,
+              shadowOffset: {
+                height: 0,
+              },
+              shadowRadius: 0,
+              elevation: 0,
             },
-            shadowRadius: 0,
-            elevation: 0,
-          },
-        }}
+          }}
+        />
+
+        <Stack.Screen
+          name="ProcessoDeTratamento"
+          component={ProcessoDeTratamentoScreen}
+        />
+        <Stack.Screen
+          name="CrisesHidricas"
+          component={CrisesHidricasScreen}
+        />
+        <Stack.Screen
+          name="Represas"
+          component={RepresasScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

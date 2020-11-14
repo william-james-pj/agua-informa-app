@@ -14,7 +14,7 @@ import {Icon} from 'react-native-elements';
 import {AppStyles} from '../AppStyles';
 
 const Modal = ({close, item}) => {
-  const ref = item.ref.split(' ');
+  const ref = item.ref !== undefined ? item.ref.split(' ') : [];
 
   return (
     <View style={{flex: 1}}>

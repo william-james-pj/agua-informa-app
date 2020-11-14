@@ -219,6 +219,12 @@ export default withFormik({
           cpf: values.cpf,
           telefone: values.telefone,
         });
+        firestore().collection('Questionario').doc(userInfo.user.uid).set({
+          p1: 0,
+          p2: 0,
+          p3: 0,
+          p4: 'NÃO',
+        });
       })
       .catch((error) => {
         setSubmitting(false);
