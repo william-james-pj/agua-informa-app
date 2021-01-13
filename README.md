@@ -10,4 +10,4 @@
 
 ## Sobre o projeto
 
-[![AguaInforma-screenshot](https://github.com/william-james-pj/agua-informa-app/imgReadme/App.png'?raw=true)
+[![AguaInforma-screenshot](https://github.com/william-james-pj/agua-informa-app/imgReadme/App.png?raw=true)
