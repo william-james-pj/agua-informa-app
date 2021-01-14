@@ -17,11 +17,12 @@ import {AppStyles} from './AppStyles';
 import {Icon} from 'react-native-elements';
 
 import HomeScreen from './screens/HomeScreen';
+import AvaliacaoScreen from './screens/AvaliacaoScreen';
 import PerfilScreen from './screens/PerfilScreen';
 import DicasScreen from './screens/DicasScreen';
 import PoluicaoScreen from './screens/PoluicaoScreen';
 import RelatosScreen from './screens/RelatosScreen';
-import GraficoScreen from './screens/GraficosScreen';
+import GraficosScreen from './screens/GraficosScreen';
 
 import AbastecimentoScreen from './screens/AbastecimentoScreen';
 import ProcessoDeTratamentoScreen from './screens/ProcessoDeTratamentoScreen';
@@ -72,40 +73,6 @@ function App() {
     );
   }
 
-  function tab() {
-    return (
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: ({color, size}) => {
-            let iconName;
-
-            if (route.name === 'Relatos') {
-              iconName = 'comments';
-            } else if (route.name === 'Grafico') {
-              iconName = 'chart-pie';
-            }
-            return (
-              <Icon
-                name={iconName}
-                size={28}
-                color={color}
-                type="font-awesome-5"
-                solid
-              />
-            );
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: AppStyles.color.primary,
-          inactiveTintColor: 'gray',
-          showLabel: false,
-        }}>
-        <Tab.Screen name="Relatos" component={RelatosScreen} />
-        <Tab.Screen name="Grafico" component={GraficoScreen} />
-      </Tab.Navigator>
-    );
-  }
-
   function drawer() {
     return (
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
@@ -137,12 +104,14 @@ function App() {
           component={drawer}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="Avaliacao" component={AvaliacaoScreen} />
         <Stack.Screen name="Dicas" component={DicasScreen} />
         <Stack.Screen name="Abastecimento" component={AbastecimentoScreen} />
+        <Stack.Screen name="Graficos" component={GraficosScreen} />
         <Stack.Screen name="Poluicao" component={PoluicaoScreen} />
         <Stack.Screen
           name="Relatos"
-          component={tab}
+          component={RelatosScreen}
           options={{
             headerTitle: false,
             headerTintColor: '#70D1D3',

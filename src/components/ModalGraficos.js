@@ -8,48 +8,18 @@ import {PieChart} from 'react-native-svg-charts';
 
 import firestore from '@react-native-firebase/firestore';
 
-const ModalGraficos = ({op}) => {
+const ModalGraficos = ({op, dadosGrafico, qtd}) => {
   const [isLoading, setLoading] = useState(true);
   const [dados, setDados] = useState([]);
   const [quantidade, setQuantidade] = useState(0);
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('Questionario')
-      .where('p1', '>', 0)
-      .onSnapshot((documentSnapshot) => {
-        let items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        let porcentagem = [];
-        let qtd = 0;
-        documentSnapshot.forEach((item) => {
-          if (op[0] === 'p1') {
-            items[item.data().p1]++;
-          } else if (op[0] === 'p2') {
-            items[item.data().p2]++;
-          } else if (op[0] === 'p3') {
-            items[item.data().p3]++;
-          } else {
-            if (item.data().p4 === 'SIM') {
-              items[0]++;
-            } else {
-              items[1]++;
-            }
-            // items[item.data().p4]++;
-          }
-
-          qtd++;
-        });
-        for (let i = 0; i <= 10; i++) {
-          porcentagem.push(`${Math.round((items[i] * 100) / qtd)}`);
-          // i >= documentSnapshot.size ? setLoading(false) : null;
-        }
-        // console.log(porcentagem);
-        setQuantidade(qtd);
-        setDados(porcentagem);
-        setTimeout(() => { setLoading(false); }, 500);
-      });
-    return () => subscriber();
-  }, [op]);
+    setDados(dadosGrafico);
+    setQuantidade(qtd);
+    setTimeout(() => {
+      setLoading(false);
+    }, 10);
+  }, []);
 
   const randomColor = () =>
     ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
@@ -117,7 +87,7 @@ const ModalGraficos = ({op}) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, height: 320}}>
       <View style={styles.titleContainer}>
         <Texto style={{textAlign: 'center', fontSize: 16}}>{op[1]}</Texto>
       </View>
@@ -133,7 +103,7 @@ const ModalGraficos = ({op}) => {
 
 const styles = StyleSheet.create({
   graficoContainer: {
-    padding: 30,
+    padding: 10,
     flex: 1,
   },
   titleContainer: {

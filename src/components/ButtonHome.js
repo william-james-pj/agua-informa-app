@@ -16,7 +16,8 @@ const ButtonHome = ({ValorText, functionOnPress, iconName, Height}) => {
 
 let estiloVariavel = function (Height) {
   return {
-    height: Height ? Height : '45%',
+    height: Height ? Height : '29%',
+    width: Height ? '40%' : '38%',
   };
 };
 
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '40%',
     borderRadius: 20,
     backgroundColor: '#fff',
     margin: 10,

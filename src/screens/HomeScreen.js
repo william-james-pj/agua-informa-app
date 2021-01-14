@@ -67,10 +67,24 @@ const HomeScreen = ({navigation}) => {
           }}
         />
         <ButtonHome
+          ValorText={'Avaliação'}
+          iconName={'star-half-alt'}
+          functionOnPress={() => {
+            navigation.navigate('Avaliacao');
+          }}
+        />
+        <ButtonHome
           ValorText={'Dicas '}
           iconName={'lightbulb'}
           functionOnPress={() => {
             navigation.navigate('Dicas');
+          }}
+        />
+        <ButtonHome
+          ValorText={'Graficos'}
+          iconName={'chart-pie'}
+          functionOnPress={() => {
+            navigation.navigate('Graficos');
           }}
         />
         <ButtonHome
@@ -84,10 +98,8 @@ const HomeScreen = ({navigation}) => {
           ValorText={'Relatos'}
           iconName={'comments'}
           functionOnPress={() => {
-            navigation.navigate('Relatos', {
-              screen: 'Relatos',
-              params: {uid: auth().currentUser.uid},
-            });
+            navigation.navigate('Relatos', {uid: auth().currentUser.uid},
+            );
           }}
         />
       </View>
@@ -110,13 +122,13 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   nomeContainer: {
     backgroundColor: AppStyles.color.fundo,
-    flex: 1.5,
+    flex: 1,
     paddingLeft: 30,
     justifyContent: 'center',
   },
   botoesContainer: {
     backgroundColor: AppStyles.color.fundo,
-    flex: 3,
+    flex: 3.5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
